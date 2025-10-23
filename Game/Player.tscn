@@ -11,7 +11,7 @@ polygon = PackedVector2Array(-10, -17, 11, -17, 11, 17, -10, 17)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hiq6t"]
 atlas = ExtResource("2_hiq6t")
-region = Rect2(0, 0, 38, 41)
+region = Rect2(152, 0, 38, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v0l8u"]
 atlas = ExtResource("2_hiq6t")
@@ -66,6 +66,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_8jpa7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -10.0
 offset_top = -17.0
 offset_right = 11.0
@@ -82,4 +83,4 @@ occluder = SubResource("OccluderPolygon2D_yg8f4")
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_wv757")
-animation = &"walk"
+animation = &"idle"
