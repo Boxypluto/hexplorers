@@ -1,11 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://cmjdprsprunrx"]
+[gd_scene load_steps=8 format=4 uid="uid://4cgwreko18nq"]
 
-[ext_resource type="Texture2D" uid="uid://dscgiqj4ds748" path="res://assets/tiles/hell_tileset.png" id="1_s2mk8"]
-[ext_resource type="Texture2D" uid="uid://2itcnjqplva0" path="res://assets/tiles/hell_tileset_ice.png" id="2_1kw8e"]
-[ext_resource type="Texture2D" uid="uid://bgbt6iwfhjbni" path="res://assets/tiles/hell_tileset_bone.png" id="3_updmx"]
+[ext_resource type="Texture2D" uid="uid://dscgiqj4ds748" path="res://assets/tiles/hell_tileset.png" id="1_727b8"]
+[ext_resource type="Texture2D" uid="uid://2itcnjqplva0" path="res://assets/tiles/hell_tileset_ice.png" id="2_c2kk0"]
+[ext_resource type="Texture2D" uid="uid://bgbt6iwfhjbni" path="res://assets/tiles/hell_tileset_bone.png" id="3_dhmag"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4qyj"]
-texture = ExtResource("1_s2mk8")
+texture = ExtResource("1_727b8")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -104,7 +104,7 @@ texture = ExtResource("1_s2mk8")
 3:3/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0cii3"]
-texture = ExtResource("2_1kw8e")
+texture = ExtResource("2_c2kk0")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 1
@@ -203,7 +203,7 @@ texture = ExtResource("2_1kw8e")
 3:3/0/terrains_peering_bit/top_side = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1f4e0"]
-texture = ExtResource("3_updmx")
+texture = ExtResource("3_dhmag")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 1:0/0 = 0
