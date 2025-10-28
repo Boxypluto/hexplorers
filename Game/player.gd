@@ -47,7 +47,7 @@ func animate():
 	var horizontal_input: float = Input.get_axis("Left", "Right")
 	
 	# Always play animations (for now)
-	if not animations.is_playing():
+	if not animations.is_playing() and animations.animation != "flap":
 		animations.play()
 		
 	# Flip the sprite based on movement
@@ -61,4 +61,8 @@ func animate():
 	if horizontal_input == 0.0 or not is_on_floor():
 		animations.animation = "idle"
 	else:
-		animations.animation = "walk"
+		if not (animations.animation == "flap" and animations.is_playing()):
+			if velocity.y < 0:
+				animations.animation = "jump"
+			else:
+				animations.animation = "fall"
