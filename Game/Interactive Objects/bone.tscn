@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq7o3ic2mqrk7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0qohl"]
+radius = 0.99999994
+height = 26.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0qohl"]
+polygon = PackedVector2Array(-13, -1, 13, -1, 13, 1, -13, 1)
+
+[node name="Bone" type="RigidBody2D"]
+gravity_scale = 0.2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -13.0
+offset_top = -1.0
+offset_right = 13.0
+offset_bottom = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0qohl")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_0qohl")
