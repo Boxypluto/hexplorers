@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq7o3ic2mqrk7"]
+[gd_scene load_steps=4 format=3 uid="uid://bq7o3ic2mqrk7"]
+
+[ext_resource type="Script" uid="uid://bacbt36klb2wx" path="res://Game/Interactive Objects/bone.gd" id="1_q6jtw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0qohl"]
 radius = 0.99999994
@@ -8,13 +10,17 @@ height = 26.0
 polygon = PackedVector2Array(-13, -1, 13, -1, 13, 1, -13, 1)
 
 [node name="Bone" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 5
 gravity_scale = 0.2
+script = ExtResource("1_q6jtw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -13.0
 offset_top = -1.0
 offset_right = 13.0
 offset_bottom = 1.0
+color = Color(1, 0, 1, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964

@@ -5,9 +5,11 @@ extends CharacterBody2D
 # flytimer controls the time between each flap
 # stamina controls how many flaps until out
 # staminaRegen is a control timer to regen stamina
+# invenotry is a string list, can create weapons from there
 var flytimer = 0;
 var stamina = 8;
 var staminaRegen = 0;
+var inventory = [];
 
 func _process(delta: float) -> void:
 	# constant velocity: velocity.x is smoothed towards zero, velocity.y is gravity
