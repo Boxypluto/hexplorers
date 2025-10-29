@@ -11,11 +11,19 @@ var flytimer = 0;
 var stamina = 8;
 var staminaRegen = 0;
 var inventory = [];
-
+var health = 100;
+var hitTimer = 0;
 func _process(delta: float) -> void:
+	if health < 0 or global_position.y > 700:
+		get_parent().get_node("deathCam").zoom = $Camera2D.zoom;
+		get_parent().get_node("deathCam").global_position = $Camera2D.global_position;
+		get_parent().get_node("deathCam").enabled = true;
+		queue_free();
+	elif health>100:
+		health = 100;
 	# constant velocity: velocity.x is smoothed towards zero, velocity.y is gravity
 	velocity.x += (0.0-velocity.x)/(15.0);
-	velocity.y += 3.5;
+	velocity.y += 500*delta;
 	
 	# Max cap on velocity
 	if abs(velocity.y) > 250:
@@ -23,9 +31,9 @@ func _process(delta: float) -> void:
 		
 	# Input control
 	if Input.is_action_pressed("Right"):
-		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and velocity.y == 3.5)+1);
+		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and is_on_floor())+1);
 	if Input.is_action_pressed("Left"):
-		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and velocity.y == 3.5)+1);
+		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and is_on_floor())+1);
 	if Input.is_action_pressed("Fly") and flytimer <= 0 and stamina > 0:
 		flytimer = 0.5;
 		velocity.y -= 350;
@@ -44,7 +52,15 @@ func _process(delta: float) -> void:
 		stamina += 1
 	else:
 		staminaRegen -=delta;
-		
+	
+	if Input.is_action_just_pressed("Attack"):
+		$WeaponStates.do_action()
+	if hitTimer > 0:
+		hitTimer-= delta;
+		modulate= Color.html("#ffaaaa");
+	else:
+		modulate= Color.html("#ffffff");
+		health += 5*delta;
 	# Animate the player (below)
 	animate()
 	move_and_slide();
@@ -76,3 +92,9 @@ func animate():
 				animations.animation = "jump"
 			else:
 				animations.animation = "fall"
+func damage(force: Vector2, h: int):
+	velocity.x += force.x
+	velocity.y -= 8;
+	if hitTimer < 0.24:
+		health -= h
+	hitTimer = 0.25;
