@@ -2,17 +2,20 @@ extends WeaponState
 class_name WeaponBone
 
 @onready var animations: AnimatedSprite2D = $BoneAnimations
-@onready var damage_dealer: Area2D = $DamageDealer
+@onready var damage_dealer: DamageDealer = $DamageDealer
 @onready var damage_dealer_shape: CollisionShape2D = $DamageDealer/Collision
-@onready var break_particles: GPUParticles2D = $"../Break"
+@onready var break_particles: GPUParticles2D = $"../BreakBone"
+@onready var break_effect: BreakEffect = $"../BreakEffect"
 
-var durability: int = 4
+const START_DURABILITY = 4
+var durability: int
 var hit_this_swing: bool = false
 
 func id() -> StringName:
 	return &"Bone"
 
 func enter():
+	durability = START_DURABILITY
 	visible = true
 
 func exit():
@@ -32,11 +35,15 @@ func physics_update(_delta: float) -> void:
 
 func on_hit_other() -> void:
 	if not hit_this_swing:
+		Freeze.frame()
 		durability -= 1
 		if durability <= 0:
+			damage_dealer.damage_last(50.0)
+			break_effect.do_break()
 			do_break()
 	hit_this_swing = true
 
 func do_break():
 	machine.current_state = null
 	break_particles.emitting = true
+	Freeze.frame(0.1)

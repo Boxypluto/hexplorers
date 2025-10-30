@@ -5,6 +5,9 @@ var active = false;
 var last_known_pos = Vector2(0,0);
 var search_timer = 0;
 var hitTimer = 0;
+
+var knockback_multiplier: float = 8.0
+
 func _process(delta: float) -> void:
 	
 	velocity.x += (0.0-velocity.x)/(15.0);
@@ -60,8 +63,8 @@ func _process(delta: float) -> void:
 				var direction = (GlobalVariables.currentLevel.get_node("Player").global_position - global_position).normalized()
 				GlobalVariables.currentLevel.get_node("Player").damage(direction * 50, 5)
 func damage(force: Vector2, h: int):
-	velocity.x += force.x
-	velocity.y -= 8;
+	velocity.x += force.x * knockback_multiplier
+	velocity.y -= 4;
 	if hitTimer < 0.24:
 		health -= h
 	hitTimer = 0.25;

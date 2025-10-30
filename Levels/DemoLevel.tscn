@@ -1,15 +1,89 @@
-[gd_scene load_steps=7 format=4 uid="uid://duv5og2tyismn"]
+[gd_scene load_steps=14 format=4 uid="uid://duv5og2tyismn"]
 
 [ext_resource type="PackedScene" uid="uid://cpwk0qxaoinxg" path="res://Game/Player.tscn" id="1_ef5c4"]
 [ext_resource type="TileSet" uid="uid://cprgho0y554r1" path="res://Testing/tiles_testing.tres" id="1_u4uqp"]
-[ext_resource type="Script" path="res://Levels/demo_level.gd" id="1_x24b0"]
+[ext_resource type="Script" uid="uid://bp17ldrnhcv6c" path="res://Levels/demo_level.gd" id="1_x24b0"]
+[ext_resource type="Script" uid="uid://gjkja6apmqy7" path="res://Game/HUD/hud.gd" id="2_d7cr2"]
 [ext_resource type="PackedScene" uid="uid://bq7o3ic2mqrk7" path="res://Game/Interactive Objects/bone.tscn" id="3_8bwi6"]
 [ext_resource type="PackedScene" uid="uid://gld2ufh5qvny" path="res://Game/Enemy/Enemy.tscn" id="5_4cx8u"]
+[ext_resource type="Texture2D" uid="uid://d2wjlwi08va7p" path="res://assets/backgrounds/back_1.png" id="7_wpb74"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ef5c4"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qs7c1"]
+atlas = ExtResource("7_wpb74")
+region = Rect2(0, 0, 0, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qqx0"]
+atlas = ExtResource("7_wpb74")
+region = Rect2(0, 720, 0, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7rns"]
+atlas = ExtResource("7_wpb74")
+region = Rect2(0, 1440, 0, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kr3k"]
+atlas = ExtResource("7_wpb74")
+region = Rect2(0, 2160, 0, 720)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w7pf"]
+atlas = ExtResource("7_wpb74")
+region = Rect2(0, 2880, 0, 720)
+
 [node name="DemoLevel" type="Node2D"]
 script = ExtResource("1_x24b0")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("2_d7cr2")
+
+[node name="Stamina" type="ColorRect" parent="HUD"]
+offset_left = 25.000002
+offset_top = 686.00006
+offset_right = 180.0
+offset_bottom = 700.00006
+scale = Vector2(1.25, 1.25)
+color = Color(0, 0, 0, 1)
+
+[node name="Out" type="ColorRect" parent="HUD/Stamina"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 153.0
+offset_bottom = 12.0
+color = Color(0.31248668, 0.38, 0.2812, 1)
+
+[node name="Current" type="ColorRect" parent="HUD/Stamina"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 141.0
+offset_bottom = 12.0
+color = Color(0.27626336, 0.67, 0.09379999, 1)
+
+[node name="Health" type="ColorRect" parent="HUD"]
+offset_left = 25.0
+offset_top = 653.0
+offset_right = 258.0
+offset_bottom = 676.0
+scale = Vector2(1.25, 1.25)
+color = Color(0, 0, 0, 1)
+
+[node name="Out" type="ColorRect" parent="HUD/Health"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 231.0
+offset_bottom = 21.0
+color = Color(0.22, 0.10119999, 0.10119999, 1)
+
+[node name="Current" type="ColorRect" parent="HUD/Health"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 213.0
+offset_bottom = 21.0
+color = Color(1, 0, 0, 1)
 
 [node name="deathCam" type="Camera2D" parent="."]
 enabled = false
@@ -20,6 +94,7 @@ limit_bottom = 605
 limit_smoothed = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_ef5c4")
 offset_left = -838.0
 offset_top = -270.0
@@ -47,4 +122,59 @@ position = Vector2(675, -42)
 position = Vector2(666, 122)
 
 [node name="Enemy2" parent="." instance=ExtResource("5_4cx8u")]
-position = Vector2(1189, 72)
+position = Vector2(106, 107)
+
+[node name="Enemy3" parent="." instance=ExtResource("5_4cx8u")]
+position = Vector2(496, 179)
+
+[node name="Enemy4" parent="." instance=ExtResource("5_4cx8u")]
+position = Vector2(144, 198)
+
+[node name="Enemy5" parent="." instance=ExtResource("5_4cx8u")]
+position = Vector2(165, 207)
+
+[node name="Backgrounds" type="Node2D" parent="."]
+z_index = -10
+
+[node name="Back" type="Parallax2D" parent="Backgrounds"]
+scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(1280, 720)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Back"]
+texture = SubResource("AtlasTexture_qs7c1")
+
+[node name="Back2" type="Parallax2D" parent="Backgrounds"]
+scroll_scale = Vector2(0.05, 0.05)
+repeat_size = Vector2(1280, 720)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Back2"]
+texture = SubResource("AtlasTexture_6qqx0")
+
+[node name="Back3" type="Parallax2D" parent="Backgrounds"]
+scroll_scale = Vector2(0.075, 0.075)
+repeat_size = Vector2(1280, 720)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Back3"]
+texture = SubResource("AtlasTexture_x7rns")
+
+[node name="Back4" type="Parallax2D" parent="Backgrounds"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1280, 720)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Back4"]
+texture = SubResource("AtlasTexture_5kr3k")
+
+[node name="Back5" type="Parallax2D" parent="Backgrounds"]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(1280, 720)
+repeat_times = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds/Back5"]
+texture = SubResource("AtlasTexture_1w7pf")
+
+[node name="Bone3" parent="." instance=ExtResource("3_8bwi6")]
+position = Vector2(360, 188)
