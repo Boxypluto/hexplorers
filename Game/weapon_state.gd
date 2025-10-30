@@ -1,5 +1,10 @@
+@abstract
 extends Node2D
 class_name WeaponState
+
+@abstract func id() -> StringName
+
+@onready var machine: WeaponStateMachine = get_parent()
 
 func enter():
 	pass

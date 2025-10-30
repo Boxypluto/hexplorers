@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var animations: AnimatedSprite2D = $Animations
-@onready var weapon_machine: Node2D = $WeaponStates
+@onready var weapon_machine: WeaponStateMachine = $WeaponStates
 
 # flytimer controls the time between each flap
 # stamina controls how many flaps until out
@@ -11,21 +11,42 @@ var flytimer = 0;
 var stamina = 8;
 var staminaRegen = 0;
 var inventory = [];
+var health = 100;
+var hitTimer = 0;
 
+<<<<<<< Updated upstream
+const PICKUP_DISTANCE: float = 32.0
+
+=======
+>>>>>>> Stashed changes
 func _process(delta: float) -> void:
+	if health < 0 or global_position.y > 700:
+		get_parent().get_node("deathCam").zoom = $Camera2D.zoom;
+		get_parent().get_node("deathCam").global_position = $Camera2D.global_position;
+		get_parent().get_node("deathCam").enabled = true;
+		queue_free();
+	elif health>100:
+		health = 100;
 	# constant velocity: velocity.x is smoothed towards zero, velocity.y is gravity
-	velocity.x += (0.0-velocity.x)/(15.0);
-	velocity.y += 3.5;
+	if is_on_floor():
+		velocity.x += (0.0-velocity.x)/(15.0);
+	else:
+		velocity.x += (0.0-velocity.x)/(50.0);
+	velocity.y += 500*delta;
 	
 	# Max cap on velocity
 	if abs(velocity.y) > 250:
 		velocity.y = 250*(velocity.y/abs(velocity.y));
-		
+	if abs(velocity.x) > 150:
+		velocity.x = 150*(velocity.x/abs(velocity.x));
+	if (Input.is_action_pressed("Right") or Input.is_action_pressed("Left")) and Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0:
+		stamina -= 0.01;
+		staminaRegen = 2;
 	# Input control
 	if Input.is_action_pressed("Right"):
-		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and velocity.y == 3.5)+1);
+		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0)+1);
 	if Input.is_action_pressed("Left"):
-		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and velocity.y == 3.5)+1);
+		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and is_on_floor()and stamina > 0)+1);
 	if Input.is_action_pressed("Fly") and flytimer <= 0 and stamina > 0:
 		flytimer = 0.5;
 		velocity.y -= 350;
@@ -42,9 +63,24 @@ func _process(delta: float) -> void:
 	if staminaRegen < 0:
 		staminaRegen = 1;
 		stamina += 1
+		if stamina > 8:
+			stamina = 8;
 	else:
 		staminaRegen -=delta;
-		
+	
+	if Input.is_action_just_pressed("Attack"):
+		$WeaponStates.do_action()
+	if hitTimer > 0:
+		hitTimer-= delta;
+		modulate= Color.html("#ffaaaa");
+	else:
+		modulate= Color.html("#ffffff");
+<<<<<<< Updated upstream
+		health += 5*delta;
+	pickupable_process()
+=======
+>>>>>>> Stashed changes
+	
 	# Animate the player (below)
 	animate()
 	move_and_slide();
@@ -76,3 +112,27 @@ func animate():
 				animations.animation = "jump"
 			else:
 				animations.animation = "fall"
+func damage(force: Vector2, h: int):
+	velocity.x += force.x
+	velocity.y -= 8;
+	if hitTimer < 0.24:
+		health -= h
+	hitTimer = 0.25;
+
+func pickupable_process() -> void:
+	var closest: PickupableWeapon = null
+	var closest_distance: float = INF
+	for pickupable in Registry.pickupables:
+		pickupable.highlighted = false
+		var distance: float = pickupable.global_position.distance_to(global_position)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest = pickupable
+	if closest:
+		if closest_distance > PICKUP_DISTANCE:
+			closest = null
+		else:
+			closest.highlighted = true
+	
+	if Input.is_action_just_pressed("PickUp") and closest != null:
+		weapon_machine.swap_to_id(closest.do_pickup())
