@@ -1,13 +1,15 @@
-[gd_scene load_steps=33 format=3 uid="uid://cpwk0qxaoinxg"]
+[gd_scene load_steps=35 format=3 uid="uid://cpwk0qxaoinxg"]
 
-[ext_resource type="Script" uid="uid://dgunar265por8" path="res://Game/player.gd" id="1_yg8f4"]
+[ext_resource type="Script" uid="uid://dgunar265por8" path="res://Game/Player/player.gd" id="1_yg8f4"]
 [ext_resource type="Texture2D" uid="uid://cwipu1yfxi81u" path="res://assets/player/player.png" id="2_hiq6t"]
-[ext_resource type="Script" uid="uid://c8x7yteunvjox" path="res://Game/weapon_state_machine.gd" id="3_cxpn3"]
+[ext_resource type="Script" uid="uid://c8x7yteunvjox" path="res://Game/Player/weapon_state_machine.gd" id="3_cxpn3"]
 [ext_resource type="Script" uid="uid://bfb26gfys43kv" path="res://Game/Weapon States/weapon_bone.gd" id="3_v0l8u"]
 [ext_resource type="Texture2D" uid="uid://bucxfgl0posvn" path="res://assets/player/weapon_break.png" id="4_1b1aa"]
 [ext_resource type="Texture2D" uid="uid://kmfcsei5enms" path="res://assets/player/weapons/bone.png" id="4_jouls"]
-[ext_resource type="Script" uid="uid://c4dkqwkpwoflp" path="res://Game/break_effect.gd" id="5_wv757"]
+[ext_resource type="Script" uid="uid://c4dkqwkpwoflp" path="res://Game/Player/break_effect.gd" id="5_wv757"]
 [ext_resource type="Script" uid="uid://cdwmtd1e7j5gn" path="res://Game/damage_dealer.gd" id="6_vgjmx"]
+[ext_resource type="Script" uid="uid://drufgbq1pj8m5" path="res://Game/Weapon States/weapon_feather.gd" id="9_ulcjw"]
+[ext_resource type="Texture2D" uid="uid://djwktwmbu4gii" path="res://assets/player/weapons/harpy_feather.png" id="10_jjv26"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jpa7"]
 size = Vector2(14, 34)
@@ -246,5 +248,15 @@ knockback = 120.0
 position = Vector2(2.75, -2)
 shape = SubResource("RectangleShape2D_cxpn3")
 disabled = true
+
+[node name="Feather" type="Node2D" parent="WeaponStates"]
+script = ExtResource("9_ulcjw")
+
+[node name="FeatherSprite" type="Sprite2D" parent="WeaponStates/Feather"]
+position = Vector2(22, -8)
+texture = ExtResource("10_jjv26")
+
+[node name="ThrowPoint" type="Marker2D" parent="WeaponStates/Feather"]
+position = Vector2(16, 0)
 
 [connection signal="hit" from="WeaponStates/Bone/DamageDealer" to="WeaponStates/Bone" method="on_hit_other"]

@@ -11,6 +11,9 @@ const START_DURABILITY = 4
 var durability: int
 var hit_this_swing: bool = false
 
+func _ready() -> void:
+	visible = false
+
 func id() -> StringName:
 	return &"Bone"
 

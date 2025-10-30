@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=4 uid="uid://duv5og2tyismn"]
+[gd_scene load_steps=15 format=4 uid="uid://duv5og2tyismn"]
 
-[ext_resource type="PackedScene" uid="uid://cpwk0qxaoinxg" path="res://Game/Player.tscn" id="1_ef5c4"]
+[ext_resource type="PackedScene" uid="uid://cpwk0qxaoinxg" path="res://Game/Player/Player.tscn" id="1_ef5c4"]
 [ext_resource type="TileSet" uid="uid://cprgho0y554r1" path="res://Testing/tiles_testing.tres" id="1_u4uqp"]
 [ext_resource type="Script" uid="uid://bp17ldrnhcv6c" path="res://Levels/demo_level.gd" id="1_x24b0"]
 [ext_resource type="Script" uid="uid://gjkja6apmqy7" path="res://Game/HUD/hud.gd" id="2_d7cr2"]
 [ext_resource type="PackedScene" uid="uid://bq7o3ic2mqrk7" path="res://Game/Interactive Objects/bone.tscn" id="3_8bwi6"]
 [ext_resource type="PackedScene" uid="uid://gld2ufh5qvny" path="res://Game/Enemy/Enemy.tscn" id="5_4cx8u"]
 [ext_resource type="Texture2D" uid="uid://d2wjlwi08va7p" path="res://assets/backgrounds/back_1.png" id="7_wpb74"]
+[ext_resource type="PackedScene" uid="uid://c71mflgirhu1p" path="res://Game/Interactive Objects/harpy_feather.tscn" id="8_qs7c1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ef5c4"]
 
@@ -178,3 +179,6 @@ texture = SubResource("AtlasTexture_1w7pf")
 
 [node name="Bone3" parent="." instance=ExtResource("3_8bwi6")]
 position = Vector2(350, 186)
+
+[node name="HarpyFeather" parent="." instance=ExtResource("8_qs7c1")]
+position = Vector2(281, 197)
