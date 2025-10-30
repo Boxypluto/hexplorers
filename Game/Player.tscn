@@ -1,10 +1,12 @@
-[gd_scene load_steps=31 format=3 uid="uid://cpwk0qxaoinxg"]
+[gd_scene load_steps=33 format=3 uid="uid://cpwk0qxaoinxg"]
 
 [ext_resource type="Script" uid="uid://dgunar265por8" path="res://Game/player.gd" id="1_yg8f4"]
 [ext_resource type="Texture2D" uid="uid://cwipu1yfxi81u" path="res://assets/player/player.png" id="2_hiq6t"]
 [ext_resource type="Script" uid="uid://c8x7yteunvjox" path="res://Game/weapon_state_machine.gd" id="3_cxpn3"]
 [ext_resource type="Script" uid="uid://bfb26gfys43kv" path="res://Game/Weapon States/weapon_bone.gd" id="3_v0l8u"]
+[ext_resource type="Texture2D" uid="uid://bucxfgl0posvn" path="res://assets/player/weapon_break.png" id="4_1b1aa"]
 [ext_resource type="Texture2D" uid="uid://kmfcsei5enms" path="res://assets/player/weapons/bone.png" id="4_jouls"]
+[ext_resource type="Script" uid="uid://c4dkqwkpwoflp" path="res://Game/break_effect.gd" id="5_wv757"]
 [ext_resource type="Script" uid="uid://cdwmtd1e7j5gn" path="res://Game/damage_dealer.gd" id="6_vgjmx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jpa7"]
@@ -210,7 +212,13 @@ animation = &"flap"
 [node name="WeaponStates" type="Node2D" parent="."]
 script = ExtResource("3_cxpn3")
 
-[node name="Break" type="GPUParticles2D" parent="WeaponStates"]
+[node name="BreakEffect" type="Sprite2D" parent="WeaponStates"]
+visible = false
+position = Vector2(20, -2)
+texture = ExtResource("4_1b1aa")
+script = ExtResource("5_wv757")
+
+[node name="BreakBone" type="GPUParticles2D" parent="WeaponStates"]
 emitting = false
 texture = SubResource("AtlasTexture_18abf")
 one_shot = true
@@ -232,6 +240,7 @@ position = Vector2(20, 0)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("6_vgjmx")
+knockback = 120.0
 
 [node name="Collision" type="CollisionShape2D" parent="WeaponStates/Bone/DamageDealer"]
 position = Vector2(2.75, -2)
