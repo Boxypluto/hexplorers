@@ -14,11 +14,8 @@ var inventory = [];
 var health = 100;
 var hitTimer = 0;
 
-<<<<<<< Updated upstream
 const PICKUP_DISTANCE: float = 32.0
 
-=======
->>>>>>> Stashed changes
 func _process(delta: float) -> void:
 	if health < 0 or global_position.y > 700:
 		get_parent().get_node("deathCam").zoom = $Camera2D.zoom;
@@ -75,11 +72,8 @@ func _process(delta: float) -> void:
 		modulate= Color.html("#ffaaaa");
 	else:
 		modulate= Color.html("#ffffff");
-<<<<<<< Updated upstream
 		health += 5*delta;
 	pickupable_process()
-=======
->>>>>>> Stashed changes
 	
 	# Animate the player (below)
 	animate()
