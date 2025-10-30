@@ -2,12 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cpwk0qxaoinxg" path="res://Game/Player.tscn" id="1_ef5c4"]
 [ext_resource type="TileSet" uid="uid://cprgho0y554r1" path="res://Testing/tiles_testing.tres" id="1_u4uqp"]
-<<<<<<< Updated upstream
-[ext_resource type="Script" path="res://Levels/demo_level.gd" id="1_x24b0"]
-=======
 [ext_resource type="Script" uid="uid://bp17ldrnhcv6c" path="res://Levels/demo_level.gd" id="1_x24b0"]
 [ext_resource type="Script" uid="uid://gjkja6apmqy7" path="res://Game/HUD/hud.gd" id="2_d7cr2"]
->>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://bq7o3ic2mqrk7" path="res://Game/Interactive Objects/bone.tscn" id="3_8bwi6"]
 [ext_resource type="PackedScene" uid="uid://gld2ufh5qvny" path="res://Game/Enemy/Enemy.tscn" id="5_4cx8u"]
 
