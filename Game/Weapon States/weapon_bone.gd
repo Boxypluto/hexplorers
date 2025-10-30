@@ -32,6 +32,7 @@ func physics_update(_delta: float) -> void:
 
 func on_hit_other() -> void:
 	if not hit_this_swing:
+		Freeze.frame()
 		durability -= 1
 		if durability <= 0:
 			do_break()
