@@ -14,8 +14,11 @@ var inventory = [];
 var health = 100;
 var hitTimer = 0;
 
+<<<<<<< Updated upstream
 const PICKUP_DISTANCE: float = 32.0
 
+=======
+>>>>>>> Stashed changes
 func _process(delta: float) -> void:
 	if health < 0 or global_position.y > 700:
 		get_parent().get_node("deathCam").zoom = $Camera2D.zoom;
@@ -25,18 +28,25 @@ func _process(delta: float) -> void:
 	elif health>100:
 		health = 100;
 	# constant velocity: velocity.x is smoothed towards zero, velocity.y is gravity
-	velocity.x += (0.0-velocity.x)/(15.0);
+	if is_on_floor():
+		velocity.x += (0.0-velocity.x)/(15.0);
+	else:
+		velocity.x += (0.0-velocity.x)/(50.0);
 	velocity.y += 500*delta;
 	
 	# Max cap on velocity
 	if abs(velocity.y) > 250:
 		velocity.y = 250*(velocity.y/abs(velocity.y));
-		
+	if abs(velocity.x) > 150:
+		velocity.x = 150*(velocity.x/abs(velocity.x));
+	if (Input.is_action_pressed("Right") or Input.is_action_pressed("Left")) and Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0:
+		stamina -= 0.01;
+		staminaRegen = 2;
 	# Input control
 	if Input.is_action_pressed("Right"):
-		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and is_on_floor())+1);
+		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0)+1);
 	if Input.is_action_pressed("Left"):
-		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and is_on_floor())+1);
+		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and is_on_floor()and stamina > 0)+1);
 	if Input.is_action_pressed("Fly") and flytimer <= 0 and stamina > 0:
 		flytimer = 0.5;
 		velocity.y -= 350;
@@ -53,6 +63,8 @@ func _process(delta: float) -> void:
 	if staminaRegen < 0:
 		staminaRegen = 1;
 		stamina += 1
+		if stamina > 8:
+			stamina = 8;
 	else:
 		staminaRegen -=delta;
 	
@@ -63,8 +75,11 @@ func _process(delta: float) -> void:
 		modulate= Color.html("#ffaaaa");
 	else:
 		modulate= Color.html("#ffffff");
+<<<<<<< Updated upstream
 		health += 5*delta;
 	pickupable_process()
+=======
+>>>>>>> Stashed changes
 	
 	# Animate the player (below)
 	animate()

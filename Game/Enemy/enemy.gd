@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 				GlobalVariables.currentLevel.get_node("Player").damage(direction * 50, 5)
 func damage(force: Vector2, h: int):
 	velocity.x += force.x
-	velocity.y -= 8;
+	velocity.y -= 4;
 	if hitTimer < 0.24:
 		health -= h
 	hitTimer = 0.25;
