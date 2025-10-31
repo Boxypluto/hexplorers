@@ -14,9 +14,14 @@ var inventory = [];
 var health = 100;
 var hitTimer = 0;
 
+var just_picked_up_weapon: bool = false
+
 const PICKUP_DISTANCE: float = 32.0
 
 func _process(delta: float) -> void:
+	
+	pickupable_process()
+	
 	if health < 0 or global_position.y > 700:
 		get_parent().get_node("deathCam").zoom = $Camera2D.zoom;
 		get_parent().get_node("deathCam").global_position = $Camera2D.global_position;
@@ -51,9 +56,6 @@ func _process(delta: float) -> void:
 		staminaRegen = 2;
 		animations.play("flap")
 	
-	if Input.is_action_just_pressed("Use"):
-		weapon_machine.do_action()
-	
 	# Timer control, regen and time between each flap
 	if flytimer >0:
 		flytimer -=delta;
@@ -65,18 +67,21 @@ func _process(delta: float) -> void:
 	else:
 		staminaRegen -=delta;
 	
-	if Input.is_action_just_pressed("Attack"):
-		$WeaponStates.do_action()
+	if Input.is_action_just_pressed("Attack") and not just_picked_up_weapon:
+		weapon_machine.do_action()
 	if hitTimer > 0:
 		hitTimer-= delta;
 		modulate= Color.html("#ffaaaa");
 	else:
 		modulate= Color.html("#ffffff");
-	pickupable_process()
 	
 	# Animate the player (below)
 	animate()
 	move_and_slide();
+	reset_perframe_variables()
+
+func reset_perframe_variables():
+	just_picked_up_weapon = false
 
 func animate():
 	# Save horizontal input
@@ -127,5 +132,7 @@ func pickupable_process() -> void:
 		else:
 			closest.highlighted = true
 	
-	if Input.is_action_just_pressed("PickUp") and closest != null:
+	if Input.is_action_just_pressed("PickUp") and closest != null and (weapon_machine.current_state == null or closest.id != weapon_machine.current_state.id()):
 		weapon_machine.swap_to_id(closest.do_pickup())
+		print("PICKED UP")
+		just_picked_up_weapon = true

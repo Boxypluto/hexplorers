@@ -22,6 +22,7 @@ func enter():
 	visible = true
 
 func exit():
+	break_particles.emitting = true
 	visible = false
 	damage_dealer_shape.disabled = true
 
@@ -48,5 +49,4 @@ func on_hit_other() -> void:
 
 func do_break():
 	machine.current_state = null
-	break_particles.emitting = true
 	Freeze.frame(0.1)
