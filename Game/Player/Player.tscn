@@ -275,7 +275,7 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource("6_vgjmx")
 knockback = 100.0
-damage = 20.0
+damage = 25.0
 
 [node name="Collision" type="CollisionShape2D" parent="WeaponStates/Weaponless/DamageDealer"]
 position = Vector2(-3.25, 4)
