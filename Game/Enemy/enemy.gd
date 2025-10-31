@@ -7,7 +7,7 @@ var search_timer = 0;
 var hitTimer = 0;
 
 var knockback_multiplier: float = 8.0
-
+const bone = preload("res://Game/Interactive Objects/bone.tscn")
 func _process(delta: float) -> void:
 	
 	velocity.x += (0.0-velocity.x)/(15.0);
@@ -32,20 +32,33 @@ func _process(delta: float) -> void:
 		if abs(velocity.x) < 20 and is_on_floor():
 			velocity.y -= 150;
 		if GlobalVariables.currentLevel.get_node("Player").global_position.x > global_position.x:
-			velocity.x += 4
+			$BigFallDetector.position.x = 15;
+			$BigFallDetector.force_raycast_update();
+			if $BigFallDetector.is_colliding():
+				velocity.x += 4
 		elif GlobalVariables.currentLevel.get_node("Player").global_position.x < global_position.x:
-			velocity.x += -4;
+			$BigFallDetector.position.x = -15;
+			$BigFallDetector.force_raycast_update();
+			if $BigFallDetector.is_colliding():
+				velocity.x -= 4
 	else:
 		if search_timer > 0:
 			search_timer -= delta;
 			if abs(velocity.x) < 20 and is_on_floor() and search_timer > 3:
 				velocity.y -= 150;
 			if last_known_pos.x+randi_range(-20,20) > global_position.x:
-				velocity.x += search_timer
+				$BigFallDetector.position.x = 15;
+				$BigFallDetector.force_raycast_update();
+				if $BigFallDetector.is_colliding():
+					velocity.x += search_timer
 			elif last_known_pos.x+randi_range(-20,20) < global_position.x:
-				velocity.x += -search_timer;
+				$BigFallDetector.position.x = -15;
+				$BigFallDetector.force_raycast_update();
+				if $BigFallDetector.is_colliding():
+					velocity.x += -search_timer;
 		pass
 		#IDLE ANIMATION
+		velocity.x = 0;
 	move_and_slide();
 	if hitTimer > 0:
 		hitTimer-= delta;
@@ -54,7 +67,14 @@ func _process(delta: float) -> void:
 		modulate= Color.html("#ffffff");
 		health += 5*delta;
 	if health < 0 or global_position.y > 700:
-		queue_free();
+		if GlobalVariables.currentLevel.has_node("Player"):
+			GlobalVariables.currentLevel.get_node("Player").health += 10;
+			var newbone = bone.instantiate();
+			newbone.global_position = global_position;
+			newbone.linear_velocity = Vector2(randi_range(-50,50),-100);
+			newbone.angular_velocity = randi_range(-20,20);
+			GlobalVariables.currentLevel.add_child(newbone);
+			queue_free();
 	if active:
 		for i in range(get_slide_collision_count()):
 			var collision = get_slide_collision(i)
