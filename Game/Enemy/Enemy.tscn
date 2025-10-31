@@ -10,7 +10,7 @@ polygon = PackedVector2Array(0, 0, 7, 0, 7, 18, 0, 18)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_xkvg1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -29,3 +29,16 @@ color = Color(0.83015114, 0.39168894, 0, 1)
 target_position = Vector2(0, 0)
 collision_mask = 3
 collide_with_areas = true
+
+[node name="SteeringRays" type="Node2D" parent="."]
+
+[node name="Left" type="RayCast2D" parent="SteeringRays"]
+position = Vector2(0, 9)
+target_position = Vector2(-9, 0)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="Right" type="RayCast2D" parent="SteeringRays"]
+position = Vector2(7, 9)
+target_position = Vector2(9, 0)
+collision_mask = 8

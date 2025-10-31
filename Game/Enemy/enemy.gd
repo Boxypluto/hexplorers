@@ -8,7 +8,13 @@ var hitTimer = 0;
 
 var knockback_multiplier: float = 8.0
 
+@onready var steer_left: RayCast2D = $SteeringRays/Left
+@onready var steer_right: RayCast2D = $SteeringRays/Right
+
 func _process(delta: float) -> void:
+	
+	var limit_left: bool = steer_left.is_colliding()
+	var limit_right: bool = steer_right.is_colliding()
 	
 	velocity.x += (0.0-velocity.x)/(15.0);
 	velocity.y += 500*delta;
@@ -45,6 +51,11 @@ func _process(delta: float) -> void:
 			elif last_known_pos.x+randi_range(-20,20) < global_position.x:
 				velocity.x += -search_timer;
 		pass
+		
+	# Enemy Seperation Steering
+	if (velocity.x > 0 and limit_right) or (velocity.x < 0 and limit_left):
+		velocity.x *= 0.8
+			
 		#IDLE ANIMATION
 	move_and_slide();
 	if hitTimer > 0:
