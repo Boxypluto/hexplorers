@@ -10,7 +10,6 @@ func _physics_process(_delta: float) -> void:
 	if outlined_node != null:
 		assert(outlined_node.material is ShaderMaterial, "Outlined Node for a Pickupable (" + id + ") must have an \"outline\" shader!")
 		outlined_node.material.set_shader_parameter("active", highlighted)
-
 func _ready() -> void:
 	Registry.register_pickupable(self)
 

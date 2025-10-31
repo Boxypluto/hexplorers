@@ -72,7 +72,6 @@ func _process(delta: float) -> void:
 		modulate= Color.html("#ffaaaa");
 	else:
 		modulate= Color.html("#ffffff");
-		health += 5*delta;
 	pickupable_process()
 	
 	# Animate the player (below)
