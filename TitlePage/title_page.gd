@@ -3,10 +3,13 @@ var animation_timer = 1;
 var change = false;
 func _ready():
 	$Title.scale.x = 0;
+	GlobalVariables.currentLevel = self;
 func _process(delta):
 	$Title.position = get_viewport().size/2.0;
 	$Title.scale.x += ((get_viewport().size.x/1200.0)-$Title.scale.x)/1.05*delta;
 	$Title.scale.y = $Title.scale.x;
+	$TileMapLayer.scale.x += ((get_viewport().size.x/1280.0)-$TileMapLayer.scale.x)/1.05*delta;
+	$TileMapLayer.scale.y = $TileMapLayer.scale.x;
 	animation_timer -= delta;
 	if animation_timer < 0:
 		animation_timer = 2;

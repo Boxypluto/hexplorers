@@ -12,3 +12,22 @@ func _process(_delta: float) -> void:
 		print(get_parent().get_node("Player").global_position);
 		for i in get_parent().get_node("TotalEnemy").get_child_count():
 			print(get_parent().get_node("TotalEnemy").get_child(i).global_position)
+	if !get_parent().has_node("Player") or get_parent().get_node("TotalEnemy").get_child_count() == 0:
+		$GameOver.scale.x += (1.0-$GameOver.scale.x)/15.0;
+		$GameOver.scale.y = $GameOver.scale.x;
+		$GameOver.modulate.a += (1.0-$GameOver.modulate.a)/15.0;
+		if $GameOver.modulate.a > 0.75:
+			if Input.is_action_just_pressed("ui_accept"):
+				if get_parent().get_node("TotalEnemy").get_child_count() == 0:
+					get_tree().quit();
+				else:
+					get_tree().reload_current_scene()
+		if !$GameOver.visible:
+			$GameOver.show();
+			$GameOver.texture = load("res://Game/HUD/You Win.svg");
+			if !get_parent().has_node("Player"):
+				$GameOver.texture = load("res://Game/HUD/Game Over.svg");
+	else:
+		$GameOver.hide();
+		$GameOver.modulate.a = 0;
+	

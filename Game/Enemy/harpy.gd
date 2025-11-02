@@ -20,6 +20,8 @@ func _process(delta: float) -> void:
 	move_x = lerp(float(move_x), 0.0, 1.0 / 55.0)
 	velocity.x = lerp(velocity.x, move_x, 1.0 / 200.0)
 	velocity.y += 500*delta;
+	if global_position.x == NAN:
+		global_position = Vector2(0,0)
 	if abs(velocity.y) > 250:
 		velocity.y = 250*(velocity.y/abs(velocity.y));
 	if abs(velocity.x) > 250:
@@ -54,6 +56,7 @@ func _process(delta: float) -> void:
 			move_x = -150;
 	else:
 		if !is_on_ceiling():
+			animations.animation = "Flap"
 			if (velocity.y > 50):
 				velocity.y -= 300;
 		else:

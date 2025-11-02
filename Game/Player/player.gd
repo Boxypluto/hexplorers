@@ -34,7 +34,8 @@ func _process(delta: float) -> void:
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 1.0 / 50.0)
 	velocity.y += 500*delta;
-	
+	if global_position.x == NAN:
+		global_position = Vector2(0,0);
 	# Max cap on velocity
 	if abs(velocity.y) > 250:
 		velocity.y = 250*(velocity.y/abs(velocity.y));
@@ -121,11 +122,12 @@ func pickupable_process() -> void:
 	var closest: PickupableWeapon = null
 	var closest_distance: float = INF
 	for pickupable in Registry.pickupables:
-		pickupable.highlighted = false
-		var distance: float = pickupable.global_position.distance_to(global_position)
-		if distance < closest_distance:
-			closest_distance = distance
-			closest = pickupable
+		if is_instance_valid(pickupable):
+			pickupable.highlighted = false
+			var distance: float = pickupable.global_position.distance_to(global_position)
+			if distance < closest_distance:
+				closest_distance = distance
+				closest = pickupable
 	if closest:
 		if closest_distance > PICKUP_DISTANCE:
 			closest = null

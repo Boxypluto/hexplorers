@@ -7,12 +7,11 @@
 [ext_resource type="FontFile" uid="uid://2yhchrcjwdyo" path="res://Game/HUD/VT323-Regular.ttf" id="3_5kr3k"]
 [ext_resource type="PackedScene" uid="uid://bq7o3ic2mqrk7" path="res://Game/Interactive Objects/bone.tscn" id="3_8bwi6"]
 [ext_resource type="Texture2D" uid="uid://cetlmphmfgwrt" path="res://Game/HUD/souls.png" id="3_x7rns"]
+[ext_resource type="Texture2D" uid="uid://b732o1nv3r85" path="res://Game/HUD/Game Over.svg" id="5_1w7pf"]
 [ext_resource type="PackedScene" uid="uid://gld2ufh5qvny" path="res://Game/Enemy/Imp.tscn" id="5_4cx8u"]
 [ext_resource type="Texture2D" uid="uid://d2wjlwi08va7p" path="res://assets/backgrounds/back_1.png" id="7_wpb74"]
 [ext_resource type="PackedScene" uid="uid://c71mflgirhu1p" path="res://Game/Interactive Objects/harpy_feather.tscn" id="8_qs7c1"]
 [ext_resource type="PackedScene" uid="uid://bsuapw1n770eq" path="res://Game/Enemy/Harpy.tscn" id="9_6qqx0"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ef5c4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qs7c1"]
 atlas = ExtResource("7_wpb74")
@@ -118,6 +117,11 @@ theme_override_font_sizes/font_size = 80
 text = "0/15"
 horizontal_alignment = 2
 
+[node name="GameOver" type="Sprite2D" parent="HUD"]
+position = Vector2(640, 360)
+scale = Vector2(0.965, 0.965)
+texture = ExtResource("5_1w7pf")
+
 [node name="deathCam" type="Camera2D" parent="."]
 enabled = false
 limit_left = -9999991
@@ -125,15 +129,6 @@ limit_top = -9999995
 limit_right = 10000009
 limit_bottom = 605
 limit_smoothed = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_ef5c4")
-offset_left = -838.0
-offset_top = -270.0
-offset_right = 2617.0
-offset_bottom = 1239.0
-color = Color(0.19076213, 0.1907624, 0.19076225, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-201, -138)

@@ -16,7 +16,8 @@ func _process(delta: float) -> void:
 	
 	var limit_left: bool = steer_left.is_colliding()
 	var limit_right: bool = steer_right.is_colliding()
-	
+	if global_position.x == NAN:
+		global_position = Vector2(0,0)
 	velocity.x = lerp(velocity.x, 0.0, 1.0 / 15.0)
 	velocity.y += 500*delta;
 	if abs(velocity.y) > 250:
