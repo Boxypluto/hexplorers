@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 	if health < 0 or global_position.y > 700:
 		if GlobalVariables.currentLevel.has_node("Player"):
 			GlobalVariables.currentLevel.get_node("Player").health += 10;
-			if randi_range(0,3) == 1:
+			if DropRandomiser.random_chance(4, 0.3):
 				var newfeather = feather.instantiate();
 				newfeather.global_position = global_position;
 				newfeather.linear_velocity = Vector2(randi_range(-50,50),-100);
