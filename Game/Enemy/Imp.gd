@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 		modulate= Color.html("#ffaaaa");
 	else:
 		modulate= Color.html("#ffffff");
-	if health < 0 or global_position.y > 700:
+	if health < 0 or global_position.y > 700 or global_position.y < -4000:
 		if GlobalVariables.currentLevel.has_node("Player"):
 			GlobalVariables.currentLevel.get_node("Player").health += 10;
 			if DropRandomiser.random_chance(4, 0.3):
