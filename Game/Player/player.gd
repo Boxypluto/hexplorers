@@ -49,7 +49,7 @@ func _process(delta: float) -> void:
 		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0)+1);
 	if Input.is_action_pressed("Left"):
 		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and is_on_floor()and stamina > 0)+1);
-	if Input.is_action_pressed("Fly") and flytimer <= 0 and stamina > 0:
+	if Input.is_action_pressed("Fly") and ((flytimer <= 0 and stamina > 0) or (is_on_floor())):
 		flytimer = 0.5;
 		velocity.y -= 350;
 		stamina -= 1;
