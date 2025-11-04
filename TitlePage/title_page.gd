@@ -26,7 +26,7 @@ func _process(delta):
 		demo.scale.x += (0.4-demo.scale.x)/1.5*delta;
 	demo.scale.y = demo.scale.x;
 	cont.scale = demo.scale/1.5;
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("Attack") or Input.is_action_just_pressed("ui_accept"):
 		change = true;
 	if change:
 		title.modulate.a -= delta*2;
