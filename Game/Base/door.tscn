@@ -14,6 +14,7 @@ script = ExtResource("1_gd2h1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_og1vw")
+flip_h = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
