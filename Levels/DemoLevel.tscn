@@ -233,10 +233,10 @@ position = Vector2(31, 193)
 [node name="TotalEnemy" type="Node" parent="."]
 
 [node name="Imp" parent="TotalEnemy" instance=ExtResource("5_4cx8u")]
-position = Vector2(749, 129)
+position = Vector2(836, 131)
 
 [node name="Imp2" parent="TotalEnemy" instance=ExtResource("5_4cx8u")]
-position = Vector2(770, 129)
+position = Vector2(820, 129)
 
 [node name="Imp3" parent="TotalEnemy" instance=ExtResource("5_4cx8u")]
 position = Vector2(793, 129)
@@ -245,10 +245,10 @@ position = Vector2(793, 129)
 position = Vector2(429, 132)
 
 [node name="Imp5" parent="TotalEnemy" instance=ExtResource("5_4cx8u")]
-position = Vector2(814, 129)
+position = Vector2(806, 130)
 
 [node name="Imp6" parent="TotalEnemy" instance=ExtResource("5_4cx8u")]
-position = Vector2(782, 105)
+position = Vector2(778, 130)
 
 [node name="Imp7" parent="TotalEnemy" instance=ExtResource("5_4cx8u")]
 position = Vector2(1130, 88)
