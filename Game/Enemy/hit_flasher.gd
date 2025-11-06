@@ -4,7 +4,7 @@ class_name HitFlasher
 @export var to_flash: CanvasItem
 var sprite: Sprite2D
 
-const HIT_EFFECT = preload("uid://crhrgpg48gjpt")
+const HIT_EFFECT = preload("res://assets/enemies/hit_effect.png")
 
 func _ready() -> void:
 	one_shot = true
