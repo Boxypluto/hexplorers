@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://duv5og2tyismn"]
+[gd_scene load_steps=19 format=4 uid="uid://duv5og2tyismn"]
 
 [ext_resource type="PackedScene" uid="uid://cpwk0qxaoinxg" path="res://Game/Player/Player.tscn" id="1_ef5c4"]
 [ext_resource type="TileSet" uid="uid://cprgho0y554r1" path="res://Testing/tiles_testing.tres" id="1_u4uqp"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://gld2ufh5qvny" path="res://Game/Enemy/Imp.tscn" id="5_4cx8u"]
 [ext_resource type="Texture2D" uid="uid://d2wjlwi08va7p" path="res://assets/backgrounds/back_1.png" id="7_wpb74"]
 [ext_resource type="PackedScene" uid="uid://bsuapw1n770eq" path="res://Game/Enemy/Harpy.tscn" id="9_6qqx0"]
+[ext_resource type="PackedScene" uid="uid://c71mflgirhu1p" path="res://Game/Interactive Objects/harpy_feather.tscn" id="13_8vs3g"]
 [ext_resource type="PackedScene" uid="uid://ls18cvjliwji" path="res://Game/Interactive Objects/devil_tail.tscn" id="13_r0uqr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qs7c1"]
@@ -262,8 +263,11 @@ position = Vector2(1656, 123)
 [node name="DevilTail" parent="." instance=ExtResource("13_r0uqr")]
 position = Vector2(81, 184)
 
-[node name="HarpyFeather2" parent="." instance=ExtResource("9_6qqx0")]
-position = Vector2(682, -81)
+[node name="HarpyFeather" parent="." instance=ExtResource("13_8vs3g")]
+position = Vector2(685, -81)
 
 [node name="DevilTail2" parent="." instance=ExtResource("13_r0uqr")]
 position = Vector2(1178, 411)
+
+[node name="HarpyFeather2" parent="." instance=ExtResource("13_8vs3g")]
+position = Vector2(26, 192)
