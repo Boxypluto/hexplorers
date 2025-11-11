@@ -145,21 +145,6 @@ shadow_enabled = true
 [node name="Bone" parent="." instance=ExtResource("3_8bwi6")]
 position = Vector2(675, -42)
 
-[node name="Enemy" parent="." instance=ExtResource("5_4cx8u")]
-position = Vector2(666, 122)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_4cx8u")]
-position = Vector2(106, 107)
-
-[node name="Enemy3" parent="." instance=ExtResource("5_4cx8u")]
-position = Vector2(496, 179)
-
-[node name="Enemy4" parent="." instance=ExtResource("5_4cx8u")]
-position = Vector2(144, 198)
-
-[node name="Enemy5" parent="." instance=ExtResource("5_4cx8u")]
-position = Vector2(165, 207)
-
 [node name="Backgrounds" type="Node2D" parent="."]
 z_index = -10
 

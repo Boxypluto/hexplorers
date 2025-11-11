@@ -12,7 +12,6 @@ func _ready():
 	GlobalVariables.currentLevel = self;
 
 func _process(delta):
-	print(get_viewport().size.x)
 	title.scale.x = lerpf(title.scale.x, 1.0, 0.01)
 	title.scale.y = title.scale.x;
 	tile_map.scale.x = lerpf(tile_map.scale.x, 1.0, 0.05)
