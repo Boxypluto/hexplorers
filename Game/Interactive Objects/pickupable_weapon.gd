@@ -3,14 +3,20 @@ class_name PickupableWeapon
 
 @export var id: StringName = &'None'
 @export var outlined_node: Node2D
+@export var disable_indicator: bool = false
+
+@export var custom_data: Dictionary[StringName, Variant]
 
 var highlighted: bool = false
 var positionChange = true;
+
+signal picked_up
 
 func _physics_process(_delta: float) -> void:
 	if outlined_node != null:
 		assert(outlined_node.material is ShaderMaterial, "Outlined Node for a Pickupable (" + id + ") must have an \"outline\" shader!")
 		outlined_node.material.set_shader_parameter("active", highlighted)
+	if disable_indicator: return
 	$PickUp.global_rotation = 0;
 	$PickUp.global_position.x = global_position.x;
 	$PickUp.scale.x -= 0.02;
@@ -26,6 +32,7 @@ func _ready() -> void:
 	Registry.register_pickupable(self)
 
 func do_pickup() -> StringName:
+	picked_up.emit()
 	Registry.remove_pickupable(self)
 	print("DID PICKUP")
 	queue_free()

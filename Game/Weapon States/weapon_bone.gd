@@ -11,6 +11,9 @@ const START_DURABILITY = 3
 var durability: int
 var hit_this_swing: bool = false
 
+func get_durability() -> int:
+	return durability
+
 func _ready() -> void:
 	visible = false
 

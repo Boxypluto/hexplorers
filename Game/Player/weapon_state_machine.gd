@@ -12,10 +12,15 @@ class_name WeaponStateMachine
 
 @onready var player: Player = $".."
 
-func swap_to_id(id: StringName):
+func _ready() -> void:
+	if current_state != null:
+		current_state.enter()
+
+func swap_to_id(id: StringName, custom_data: Dictionary[StringName, Variant] = {}):
 	for state in get_children():
 		if state is not WeaponState: continue
 		state = state as WeaponState
+		state.custom_data = custom_data
 		if state.id() == id:
 			current_state = state
 
@@ -34,10 +39,10 @@ func _physics_process(delta: float) -> void:
 	if current_state == null:
 		player.duability_indicator.self_modulate.a = 0.0
 		return
-	if current_state is WeaponStateFeather:
+	if not current_state.uses_durability():
 		player.duability_indicator.self_modulate.a = 0.0
 	else:
-		player.duability_indicator.durability = current_state.durability
+		player.duability_indicator.durability = current_state.get_durability()
 	current_state.physics_update(delta)
 
 # WEAPON LESS STATE --- DO NOT ADD OTHER STATES TO THIS FILE! INSTEAD ADD THEM AS CHILD NOTED WHICH INHERIT "WeaponState"!

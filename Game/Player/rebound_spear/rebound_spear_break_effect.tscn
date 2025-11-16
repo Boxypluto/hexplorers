@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bto6h6uuk02c3"]
+
+[ext_resource type="Texture2D" uid="uid://clmrbc4wqymh3" path="res://assets/player/weapons/rebound_spear.png" id="1_300ik"]
+[ext_resource type="Script" uid="uid://c1wwdb0iwq3p8" path="res://Game/Player/rebound_spear/rebound_spear_break_effect.gd" id="2_sdfj8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdfj8"]
+atlas = ExtResource("1_300ik")
+region = Rect2(106.15343, 44.60533, 10.251938, 12.410248)
+
+[sub_resource type="Curve" id="Curve_kio65"]
+_data = [Vector2(0.0075757504, 1), 0.0, 0.0, 0, 0, Vector2(0.64393944, 1), 0.0, 0.0, 0, 0, Vector2(0.8712122, 0.77528095), -2.5357006, -2.5357006, 0, 0, Vector2(0.9924243, 0.011235952), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ylnmv"]
+curve = SubResource("Curve_kio65")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yl3hr"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+inherit_velocity_ratio = 0.93
+spread = 180.0
+initial_velocity_min = 123.53
+initial_velocity_max = 276.47
+gravity = Vector3(0, 980, 0)
+alpha_curve = SubResource("CurveTexture_ylnmv")
+
+[node name="ReboundSpearBreakEffect" type="GPUParticles2D"]
+emitting = false
+texture = SubResource("AtlasTexture_sdfj8")
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_yl3hr")
+script = ExtResource("2_sdfj8")

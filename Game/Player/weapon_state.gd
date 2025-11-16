@@ -5,6 +5,13 @@ class_name WeaponState
 @abstract func id() -> StringName
 
 @onready var machine: WeaponStateMachine = get_parent()
+var custom_data: Dictionary[StringName, Variant]
+
+func uses_durability() -> bool:
+	return true
+
+func get_durability() -> int:
+	return 0
 
 func enter():
 	pass

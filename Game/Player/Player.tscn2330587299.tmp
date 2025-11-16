@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cpwk0qxaoinxg"]
+[gd_scene load_steps=51 format=3 uid="uid://cpwk0qxaoinxg"]
 
 [ext_resource type="Script" uid="uid://dgunar265por8" path="res://Game/Player/player.gd" id="1_yg8f4"]
 [ext_resource type="Texture2D" uid="uid://cwipu1yfxi81u" path="res://assets/player/player.png" id="2_hiq6t"]
@@ -13,9 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://djwktwmbu4gii" path="res://assets/player/weapons/harpy_feather.png" id="10_jjv26"]
 [ext_resource type="Script" uid="uid://cx0v3s441w0d4" path="res://Game/Player/weapon_tail.gd" id="12_ee8ni"]
 [ext_resource type="Texture2D" uid="uid://crvgmgwx812xu" path="res://assets/player/weapons/tail_whip.png" id="12_q7ak8"]
-[ext_resource type="Script" uid="uid://b0np8p1b31y4o" path="res://Game/Player/rebound_spear/weapon_spear.gd" id="14_fdftm"]
+[ext_resource type="Script" uid="uid://btmtcacfpr5ot" path="res://Game/Player/weapon_generic_throw.gd" id="14_6upfr"]
 [ext_resource type="PackedScene" uid="uid://ltkl8jrm43r" path="res://Game/Player/rebound_spear/rebound_spear.tscn" id="15_px0gh"]
-[ext_resource type="Texture2D" uid="uid://clmrbc4wqymh3" path="res://assets/player/weapons/rebound_spear.png" id="16_fdftm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jpa7"]
 size = Vector2(14, 34)
@@ -293,10 +292,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ee8ni"]
 size = Vector2(75, 41)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wg23h"]
-atlas = ExtResource("16_fdftm")
-region = Rect2(128, 0, 64, 64)
-
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 9
@@ -424,18 +419,13 @@ process_callback = 0
 wait_time = 0.2
 
 [node name="Spear" type="Node2D" parent="WeaponStates" node_paths=PackedStringArray("throw_point")]
-script = ExtResource("14_fdftm")
+script = ExtResource("14_6upfr")
 PROJECTILE = ExtResource("15_px0gh")
 throw_point = NodePath("ThrowPoint")
 weapon_id = &"Spear"
-weapon_uses_durability = true
 
 [node name="ThrowPoint" type="Marker2D" parent="WeaponStates/Spear"]
 position = Vector2(16, 0)
-
-[node name="SpearSprite" type="Sprite2D" parent="WeaponStates/Spear"]
-position = Vector2(21, 4)
-texture = SubResource("AtlasTexture_wg23h")
 
 [connection signal="hit" from="WeaponStates/Bone/DamageDealer" to="WeaponStates/Bone" method="on_hit_other"]
 [connection signal="hit" from="WeaponStates/Tail/DamageDealer" to="WeaponStates/Tail" method="on_hit_other"]

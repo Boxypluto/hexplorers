@@ -9,77 +9,89 @@ class_name Player
 # stamina controls how many flaps until out
 # staminaRegen is a control timer to regen stamina
 # invenotry is a string list, can create weapons from there
-var flytimer = 0;
-var stamina = 12;
-var staminaRegen = 0;
-var inventory = [];
-var health = 100;
-var hitTimer = 0;
+var flytimer = 0
+var staminaRegen = 0
+var health = 100
+var hitTimer = 0
+
+var max_speed: float = 10.0
+var acceleration: float = 5.0 * 180.0
+var gravity: float = 500
+var fast_gravity: float = 1200
+var max_fall_speed: float = 250.0
+var max_fast_fall_speed: float = 500.0
+var max_rise_speed: float = 250.0
 
 var just_picked_up_weapon: bool = false
 
-const PICKUP_DISTANCE: float = 32.0
+const PICKUP_DISTANCE: float = 48.0
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	pickupable_process()
-	if health < 0 or global_position.y > 700:
-		get_parent().get_node("deathCam").zoom = $Camera2D.zoom;
-		get_parent().get_node("deathCam").global_position = $Camera2D.global_position;
-		get_parent().get_node("deathCam").enabled = true;
-		queue_free();
-	elif health>100:
-		health = 100;
+	health_process()
+	walk_process(delta)
+	gravity_process(delta)
+	
 	# constant velocity: velocity.x is smoothed towards zero, velocity.y is gravity
-	if is_on_floor():
-		velocity.x = lerp(velocity.x, 0.0, 1.0 / 15.0)
-	else:
-		velocity.x = lerp(velocity.x, 0.0, 1.0 / 50.0)
-	velocity.y += 500*delta;
-	# Max cap on velocity
-	velocity.y = clamp(velocity.y, -250, 250);
-	velocity.x = clamp(velocity.x, -150, 150);
-	if (Input.is_action_pressed("Right") or Input.is_action_pressed("Left")) and Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0:
-		stamina -= 0.01;
-		staminaRegen = 2;
-	# Input control
-	if Input.is_action_pressed("Right"):
-		velocity.x += 5*(int(Input.is_action_pressed("Sprint")and is_on_floor() and stamina > 0)+1);
-	if Input.is_action_pressed("Left"):
-		velocity.x -= 5*(int(Input.is_action_pressed("Sprint")and is_on_floor()and stamina > 0)+1);
-	if Input.is_action_pressed("Fly") and ((flytimer <= 0 and stamina > 0) or (is_on_floor())):
-		flytimer = 0.5;
-		velocity.y -= 350;
-		stamina -= 1;
-		staminaRegen = 2;
+	
+	
+	
+	if Input.is_action_pressed("Fly") and ((flytimer <= 0) or (is_on_floor())):
+		flytimer = 0.5
+		velocity.y -= 350
+		staminaRegen = 2
 		animations.play("flap")
 	
 	# Timer control, regen and time between each flap
-	if flytimer >0:
-		flytimer -=delta;
-	if staminaRegen < 0:
-		staminaRegen = 0.75;
-		stamina += 1
-		if stamina > 12:
-			stamina = 12;
-	else:
-		staminaRegen -=delta;
+	if flytimer > 0:
+		flytimer -= delta
 	
 	if Input.is_action_just_pressed("Attack") and not just_picked_up_weapon:
 		weapon_machine.do_action()
 	if hitTimer > 0:
-		hitTimer-= delta;
-		modulate= Color.html("#ffaaaa");
+		hitTimer -= delta
+		modulate= Color.html("#ffaaaa")
 	else:
-		modulate= Color.html("#ffffff");
+		modulate= Color.html("#ffffff")
 	
 	# Animate the player (below)
 	animate()
-	move_and_slide();
+	move_and_slide()
 	reset_perframe_variables()
 
 func reset_perframe_variables():
 	just_picked_up_weapon = false
+
+func walk_process(delta: float):
+	if is_on_floor():
+		velocity.x = lerp(velocity.x, 0.0, 1.0 / 15.0)
+	else:
+		velocity.x = lerp(velocity.x, 0.0, 1.0 / 50.0)
+	velocity.x = clamp(velocity.x, -150, 150)
+	if Input.is_action_pressed("Right"):
+		print(1.0 / delta)
+		velocity.x += acceleration * delta
+	if Input.is_action_pressed("Left"):
+		velocity.x -= acceleration * delta
+
+func gravity_process(delta: float):
+	var current_max_fall: float = max_fall_speed
+	var current_gravity: float = gravity
+	if Input.is_action_pressed("Down"):
+		current_max_fall = max_fast_fall_speed
+		current_gravity = fast_gravity
+	velocity.y += current_gravity * delta
+	velocity.y = clamp(velocity.y, -max_rise_speed, current_max_fall)
+
+func health_process():
+	if health < 0 or global_position.y > 700:
+		get_parent().get_node("deathCam").zoom = $Camera2D.zoom
+		get_parent().get_node("deathCam").global_position = $Camera2D.global_position
+		get_parent().get_node("deathCam").enabled = true
+		queue_free()
+	elif health>100:
+		health = 100
 
 func animate():
 	# Save horizontal input
@@ -111,10 +123,10 @@ func animate():
 			
 func damage(force: Vector2, h: int):
 	velocity.x += force.x
-	velocity.y -= 8;
+	velocity.y -= 8
 	if hitTimer < 0.24:
 		health -= h
-	hitTimer = 0.25;
+	hitTimer = 0.25
 
 func pickupable_process() -> void:
 	var closest: PickupableWeapon = null
@@ -133,6 +145,6 @@ func pickupable_process() -> void:
 			closest.highlighted = true
 	
 	if Input.is_action_just_pressed("PickUp") and closest != null and (weapon_machine.current_state == null or closest.id != weapon_machine.current_state.id()):
-		weapon_machine.swap_to_id(closest.do_pickup())
+		weapon_machine.swap_to_id(closest.do_pickup(), closest.custom_data)
 		print("PICKED UP")
 		just_picked_up_weapon = true

@@ -4,6 +4,7 @@ class_name ProjectilePlayerFeather
 @onready var damage_shape: CollisionShape2D = $DamageDealer/DamageShape
 @onready var damage_timer: Timer = $DamageDealer/DamageTimer
 @onready var harpy_feather_thrown: Spin = $HarpyFeatherThrown
+const BREAK_EFFECT = preload("res://Game/Player/rebound_spear/rebound_spear_break_effect.tscn")
 
 var direction: Vector2
 const SPEED: float = 470.0
@@ -26,6 +27,11 @@ func _physics_process(delta: float) -> void:
 	var _collision: KinematicCollision2D = move_and_collide(velocity)
 
 func do_break():
+	var effect: GPUParticles2D = BREAK_EFFECT.instantiate()
+	get_parent().add_child(effect)
+	effect.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+	effect.global_position = global_position
+	effect.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_ON
 	queue_free()
 
 func damage_cycle() -> void:
