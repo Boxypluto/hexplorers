@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ltkl8jrm43r"]
+[gd_scene load_steps=16 format=3 uid="uid://ltkl8jrm43r"]
 
 [ext_resource type="Script" uid="uid://br7wudnxrqnnk" path="res://Game/Player/rebound_spear/rebound_spear_projectile.gd" id="1_01bqf"]
 [ext_resource type="Texture2D" uid="uid://clmrbc4wqymh3" path="res://assets/player/weapons/rebound_spear.png" id="1_binhh"]
@@ -10,7 +10,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vxkd3"]
 shader = ExtResource("2_6min1")
 shader_parameter/active = false
-shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_color = Color(1, 0.54509807, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6min1"]
 atlas = ExtResource("1_binhh")
@@ -46,6 +46,9 @@ size = Vector2(13, 3)
 radius = 14.0
 height = 62.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xjjr"]
+radius = 30.016663
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6min1"]
 friction = 0.0
 
@@ -62,6 +65,7 @@ animation = &"Throw"
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
 position = Vector2(3.5, -0.5)
 shape = SubResource("RectangleShape2D_stc4m")
+disabled = true
 
 [node name="DamageDealer" type="Area2D" parent="."]
 collision_layer = 0
@@ -75,6 +79,10 @@ position = Vector2(2, 0)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_01bqf")
 debug_color = Color(0.9823169, 0, 0.36746094, 0.41960785)
+
+[node name="ReboundShape" type="CollisionShape2D" parent="DamageDealer"]
+shape = SubResource("CircleShape2D_6xjjr")
+debug_color = Color(0.9930747, 0, 0.24958807, 0.41960785)
 
 [node name="PickupableWeapon" type="RigidBody2D" parent="." node_paths=PackedStringArray("outlined_node")]
 collision_layer = 0
@@ -94,7 +102,7 @@ shape = SubResource("CircleShape2D_vxkd3")
 disabled = true
 
 [node name="PickUp" type="Sprite2D" parent="."]
-position = Vector2(0, -42)
+position = Vector2(0, -43)
 scale = Vector2(0.94117653, 1)
 texture = ExtResource("6_vxkd3")
 

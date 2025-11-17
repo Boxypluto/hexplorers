@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://51am3m3uenxv"]
+
+[ext_resource type="Script" uid="uid://credaa611kp8c" path="res://Game/Interactive Objects/pickupable_weapon.gd" id="1_844yc"]
+[ext_resource type="Material" uid="uid://bcro3j2u4pdao" path="res://Game/Interactive Objects/normal_outline.tres" id="2_wjav2"]
+[ext_resource type="Texture2D" uid="uid://clmrbc4wqymh3" path="res://assets/player/weapons/rebound_spear.png" id="3_844yc"]
+[ext_resource type="Texture2D" uid="uid://cjf6morhojiyc" path="res://Game/Interactive Objects/PickUp.png" id="4_xkwam"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_844yc"]
+radius = 3.0
+height = 46.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0qohl"]
+polygon = PackedVector2Array(-13, -1, 13, -1, 13, 1, -13, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjav2"]
+atlas = ExtResource("3_844yc")
+region = Rect2(128, 0, 64, 64)
+
+[node name="Spear" type="RigidBody2D" node_paths=PackedStringArray("outlined_node")]
+collision_layer = 4
+gravity_scale = 0.2
+script = ExtResource("1_844yc")
+id = &"Spear"
+outlined_node = NodePath("Sprite")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -13.0
+offset_top = -1.0
+offset_right = 13.0
+offset_bottom = 1.0
+color = Color(1, 0, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_844yc")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_0qohl")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = ExtResource("2_wjav2")
+texture = SubResource("AtlasTexture_wjav2")
+
+[node name="PickUp" type="Sprite2D" parent="."]
+position = Vector2(0, -20)
+scale = Vector2(0.94117653, 1)
+texture = ExtResource("4_xkwam")

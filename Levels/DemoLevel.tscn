@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://duv5og2tyismn"]
+[gd_scene load_steps=28 format=4 uid="uid://duv5og2tyismn"]
 
 [ext_resource type="PackedScene" uid="uid://cpwk0qxaoinxg" path="res://Game/Player/Player.tscn" id="1_ef5c4"]
 [ext_resource type="TileSet" uid="uid://cprgho0y554r1" path="res://Testing/tiles_testing.tres" id="1_u4uqp"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://vudtt2kpduyt" path="res://Game/Enemy/Heavy.tscn" id="14_vmj0w"]
 [ext_resource type="Texture2D" uid="uid://d0jryjoik87qx" path="res://assets/enemies/impio.png" id="17_53k2k"]
 [ext_resource type="Script" uid="uid://c4va0j2ge5kw" path="res://Levels/impio.gd" id="18_vmj0w"]
+[ext_resource type="PackedScene" uid="uid://51am3m3uenxv" path="res://Game/Interactive Objects/spear.tscn" id="20_gdbjo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xko7b"]
 atlas = ExtResource("6_s84ir")
@@ -328,3 +329,9 @@ position = Vector2(1851, 96)
 position = Vector2(1167, -165)
 texture = ExtResource("17_53k2k")
 script = ExtResource("18_vmj0w")
+
+[node name="Spear" parent="." instance=ExtResource("20_gdbjo")]
+position = Vector2(203, 186)
+
+[node name="Spear2" parent="." instance=ExtResource("20_gdbjo")]
+position = Vector2(903, 137)

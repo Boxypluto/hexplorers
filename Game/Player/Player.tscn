@@ -136,7 +136,7 @@ region = Rect2(16.437286, 29.47374, 18.500946, 12.4184265)
 _data = [Vector2(0.0075757504, 1), 0.0, 0.0, 0, 0, Vector2(0.64393944, 1), 0.0, 0.0, 0, 0, Vector2(0.8712122, 0.77528095), -2.5357006, -2.5357006, 0, 0, Vector2(0.9924243, 0.011235952), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[sub_resource type="CurveTexture" id="CurveTexture_rfljk"]
+[sub_resource type="CurveTexture" id="CurveTexture_fdftm"]
 curve = SubResource("Curve_xugv6")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44npq"]
@@ -148,7 +148,7 @@ spread = 180.0
 initial_velocity_min = 123.53
 initial_velocity_max = 276.47
 gravity = Vector3(0, 980, 0)
-alpha_curve = SubResource("CurveTexture_rfljk")
+alpha_curve = SubResource("CurveTexture_fdftm")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_86ark"]
 atlas = ExtResource("12_q7ak8")
@@ -320,9 +320,8 @@ position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_wv757")
 animation = &"flap"
 
-[node name="WeaponStates" type="Node2D" parent="." node_paths=PackedStringArray("current_state")]
+[node name="WeaponStates" type="Node2D" parent="."]
 script = ExtResource("3_cxpn3")
-current_state = NodePath("Spear")
 
 [node name="BreakEffect" type="Sprite2D" parent="WeaponStates"]
 visible = false

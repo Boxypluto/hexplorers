@@ -24,7 +24,7 @@ var max_rise_speed: float = 250.0
 
 var just_picked_up_weapon: bool = false
 
-const PICKUP_DISTANCE: float = 48.0
+const PICKUP_DISTANCE: float = 64.0
 
 func _physics_process(delta: float) -> void:
 	
