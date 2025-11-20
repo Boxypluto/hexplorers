@@ -4,6 +4,9 @@ class_name Player
 @onready var animations: AnimatedSprite2D = $Animations
 @onready var weapon_machine: WeaponStateMachine = $WeaponStates
 @onready var duability_indicator: DurabilityIndicator = $"../HUD/Control/DuabilityIndicator"
+@onready var camera_2d: Camera2D = $Camera2D
+
+var cam_bottom: Node2D
 
 # flytimer controls the time between each flap
 # stamina controls how many flaps until out
@@ -25,6 +28,21 @@ var max_rise_speed: float = 250.0
 var just_picked_up_weapon: bool = false
 
 const PICKUP_DISTANCE: float = 64.0
+
+func _ready() -> void:
+	cam_bottom = get_tree().get_first_node_in_group("CameraBottom")
+	position_camera()
+	camera_2d.reset_smoothing()
+
+func _process(_delta: float) -> void:
+	position_camera()
+
+func position_camera():
+	if cam_bottom != null:
+		if global_position.y > cam_bottom.global_position.y:
+			camera_2d.global_position.y = cam_bottom.global_position.y
+		else:
+			camera_2d.global_position.y = global_position.y
 
 func _physics_process(delta: float) -> void:
 	
@@ -70,7 +88,6 @@ func walk_process(delta: float):
 		velocity.x = lerp(velocity.x, 0.0, 1.0 / 50.0)
 	velocity.x = clamp(velocity.x, -150, 150)
 	if Input.is_action_pressed("Right"):
-		print(1.0 / delta)
 		velocity.x += acceleration * delta
 	if Input.is_action_pressed("Left"):
 		velocity.x -= acceleration * delta

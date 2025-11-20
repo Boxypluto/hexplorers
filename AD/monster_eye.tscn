@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bevk32xhbv10k"]
+
+[ext_resource type="Texture2D" uid="uid://dytm4iph75hba" path="res://AD/eye_white.png" id="1_3nyqt"]
+[ext_resource type="Script" uid="uid://bcug7spbow3qe" path="res://AD/monster_eye.gd" id="2_3nyqt"]
+[ext_resource type="Texture2D" uid="uid://cncjb14pcbfkh" path="res://AD/eye.png" id="2_tbr7f"]
+
+[node name="MonsterEye" type="Sprite2D"]
+clip_children = 2
+texture = ExtResource("1_3nyqt")
+script = ExtResource("2_3nyqt")
+
+[node name="Pupil" type="Sprite2D" parent="."]
+texture = ExtResource("2_tbr7f")
