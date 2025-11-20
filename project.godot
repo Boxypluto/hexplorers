@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Hexplorers"
-run/main_scene="uid://0vuuc2eqrap6"
+run/main_scene="uid://lhxr5q5cuwxm"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
