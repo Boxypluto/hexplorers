@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Hexplorers"
-run/main_scene="uid://ciux6e6hdt2f"
+run/main_scene="uid://des14bbnfnd74"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,6 +27,7 @@ LevelLoader="*res://Global/level_loader.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [dotnet]
 

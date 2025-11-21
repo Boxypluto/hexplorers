@@ -21,10 +21,10 @@ transform = Transform3D(0.35355335, 0.7071068, -0.61237246, -0.35355335, 0.70710
 transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="AngleEyeRing2" parent="SubViewport" instance=ExtResource("1_0fdq2")]
-transform = Transform3D(1.0522208, -0.6075, 0, 0.6075, 1.0522208, 0, 0, 0, 1.215, 0, 0, 0)
+transform = Transform3D(0.887676, -0.5125, 0, 0.5125, 0.887676, 0, 0, 0, 1.025, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.985488, 0.16974512, 0, -0.16974512, 0.985488, 0, 1.8223109, 10.44331)
-projection = 1
+transform = Transform3D(1, 0, 0, 0, 0.985488, 0.16974512, 0, -0.16974512, 0.985488, 0, 2.5607219, 19.333847)
 current = true
+fov = 29.0
 size = 9.217612
