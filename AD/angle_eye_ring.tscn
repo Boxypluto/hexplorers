@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3x4w2qkcrxv0"]
+
+[ext_resource type="PackedScene" uid="uid://bs6ujokcv5cvv" path="res://AD/angel_eye.tscn" id="1_0ujag"]
+[ext_resource type="Script" uid="uid://cdgl2f4yqh4nb" path="res://AD/angle_eye_ring.gd" id="1_8rgka"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8rgka"]
+
+[node name="AngleEyeRing" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_8rgka")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 5.0
+height = 1.0
+sides = 16
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCylinder3D"]
+operation = 2
+radius = 4.5
+sides = 16
+
+[node name="Eyes" type="Node3D" parent="."]
+
+[node name="AngelEye" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="AngelEye2" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5, 0, 4.371139e-07)
+
+[node name="AngelEye3" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.1855695e-07, 0, 5)
+
+[node name="AngelEye4" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.1855695e-07, 0, -5)
+
+[node name="AngelEye5" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 3.535534, 0, 3.535534)
+
+[node name="AngelEye6" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -3.5355341, 0, -3.5355337)
+
+[node name="AngelEye7" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, -3.5355341, 0, 3.5355337)
+
+[node name="AngelEye8" parent="Eyes" instance=ExtResource("1_0ujag")]
+transform = Transform3D(0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071067, 3.5355337, 0, -3.5355341)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8rgka")
